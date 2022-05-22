@@ -16,27 +16,7 @@ const IndexPage: NextPage = ({ data }: any) => {
         <h2>{data.homepage.subtitle}</h2>
         <PortableText
           value={data.homepage.body}
-        // components={/* optional object of custom components to use */}
         />
-
-        {data.pets.length > 0 && (
-          <ul>
-            {data.pets.map((pet: any) => (
-              <li key={pet._id}>{pet?.name}</li>
-            ))}
-          </ul>
-        )}
-        {!data.pets.length > 0 && <p>No pets cabron!</p>}
-        {data.pets.length > 0 && (
-          <div>
-            <pre>{JSON.stringify(data.pets, null, 2)}</pre>
-          </div>
-        )}
-        {!data.pets.length > 0 && (
-          <div>
-            Data will show up when configuration is correct... pendejo!
-          </div>
-        )}
       </main>
     </>
   );
