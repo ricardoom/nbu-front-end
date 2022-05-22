@@ -94,7 +94,7 @@ export default function Page({data, preview}) {
   // Client-side uses the same query, so we may need to filter it down again
   const page = filterDataToSingleItem(previewData, preview)
 
-  const { title, content } = page;
+  const { title, content } = page; //? Is it really necessary to destructure here?
   // Notice the optional?.chaining conditionals wrapping every piece of content? 
   // This is extremely important as you can't ever rely on a single field
   // of data existing when Editors are creating new documents. 
