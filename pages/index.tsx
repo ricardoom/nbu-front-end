@@ -3,13 +3,22 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import { createClient } from 'next-sanity';
+import { PortableText } from '@portabletext/react';
+
 
 const IndexPage: NextPage = ({ data }: any) => {
   return (
     <>
-      <header><h1>Pet Names</h1></header>
+      <header>
+        <h1>{data.homepage.title}</h1>
+      </header>
       <main>
-        <h2>The names:</h2>
+        <h2>{data.homepage.subtitle}</h2>
+        <PortableText
+          value={data.homepage.body}
+        // components={/* optional object of custom components to use */}
+        />
+
         {data.pets.length > 0 && (
           <ul>
             {data.pets.map((pet: any) => (
@@ -43,12 +52,13 @@ const client = createClient({
 });
 
 export async function getStaticProps() {
-  const pets:any[] = await client.fetch(`*[_type == 'pet']`);
-  const homepage = `*[_type == "homepage"][0] {
+  const pets: any[] = await client.fetch(`*[_type == 'pet']`);
+  const homepage = await client.fetch(`*[_type == "homepage"][0] {
     title,
     subtitle,
     body,
-  }`;
+  }`
+  );
 
   const data = { homepage, pets };
   return {
@@ -56,5 +66,5 @@ export async function getStaticProps() {
       data
     },
     revalidate: 1,
-  }
+  };
 }

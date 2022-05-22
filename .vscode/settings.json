@@ -11,4 +11,7 @@
     "editor.selectionBackground": "#670645",
     // "editor.selectionForeground": "#000000"
   },
+  "conventionalCommits.scopes": [
+    "global"
+  ],
 }
