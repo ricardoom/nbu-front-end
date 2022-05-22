@@ -12,7 +12,8 @@
     // "editor.selectionForeground": "#000000"
   },
   "conventionalCommits.scopes": [
-    "global"
+    "global",
+    "Blog"
   ],
   "cSpell.words": [
     "groq"
