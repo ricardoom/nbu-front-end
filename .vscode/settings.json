@@ -14,4 +14,7 @@
   "conventionalCommits.scopes": [
     "global"
   ],
+  "cSpell.words": [
+    "groq"
+  ],
 }
