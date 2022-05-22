@@ -1,11 +1,9 @@
-// ./web/pages/[slug].js
-
-import React from 'react'
 import { groq } from 'next-sanity'
-
 import { usePreviewSubscription } from '../lib/sanity'
 import { getClient } from '../lib/sanity.server'
 import { PortableText } from '@portabletext/react';
+import SiteHead from '../components/SiteHead';
+import SiteTitle from '../components/ SiteTitle';
 /**
  * Helper function to return the correct version of the document
  * If we're in "preview mode" and have multiple documents, return the draft
@@ -101,7 +99,9 @@ export default function Page({data, preview}) {
   // It'll be completely blank when they start!
   return (
     <>
-      {page?.title && <h1>{title}</h1>}
+      <SiteHead />
+      <SiteTitle />
+      {page?.title && <h2>{title}</h2>}
       {page?.content && <PortableText value={content}></PortableText>}
     </>
   )
