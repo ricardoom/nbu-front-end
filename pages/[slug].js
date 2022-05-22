@@ -100,9 +100,9 @@ export default function Page({data, preview}) {
   // of data existing when Editors are creating new documents. 
   // It'll be completely blank when they start!
   return (
-    <div style={{maxWidth: `20rem`, padding: `1rem`}}>
+    <>
       {page?.title && <h1>{title}</h1>}
       {page?.content && <PortableText value={content}></PortableText>}
-    </div>
+    </>
   )
 }
