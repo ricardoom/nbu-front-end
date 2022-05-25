@@ -1,9 +1,9 @@
 import { groq } from 'next-sanity'
-import { usePreviewSubscription } from '../lib/sanity'
-import { getClient } from '../lib/sanity.server'
+import { usePreviewSubscription } from '../../lib/sanity'
+import { getClient } from '../../lib/sanity.server'
 import { PortableText } from '@portabletext/react';
-import SiteHead from '../components/SiteHead';
-import SiteTitle from '../components/ SiteTitle';
+import SiteHead from '../../components/SiteHead';
+import SiteTitle from '../../components/ SiteTitle';
 /**
  * Helper function to return the correct version of the document
  * If we're in "preview mode" and have multiple documents, return the draft
@@ -36,7 +36,7 @@ export async function getStaticPaths() {
   const pages = await getClient().fetch(allSlugsQuery)
 
   return {
-    paths: pages.map((slug) => `/${slug}`),
+    paths: pages.map((slug) => `/posts/${slug}`),
     fallback: true,
   }
 }
@@ -55,7 +55,7 @@ export async function getStaticPaths() {
  * It does not need to be set or changed here
  */
 export async function getStaticProps({params, preview = false}) {
-  const query = groq`*[_type == "article" && slug.current == $slug]`
+  const query = groq`*[_type == "post" && slug.current == $slug]`
   const queryParams = {slug: params.slug}
   const data = await getClient(preview).fetch(query, queryParams)
 
@@ -92,7 +92,7 @@ export default function Page({data, preview}) {
   // Client-side uses the same query, so we may need to filter it down again
   const page = filterDataToSingleItem(previewData, preview)
 
-  const { title, content } = page; //? Is it really necessary to destructure here?
+  // const { title, content } = page; //? Is it really necessary to destructure here?
   // Notice the optional?.chaining conditionals wrapping every piece of content? 
   // This is extremely important as you can't ever rely on a single field
   // of data existing when Editors are creating new documents. 
@@ -101,8 +101,8 @@ export default function Page({data, preview}) {
     <>
       <SiteHead />
       <SiteTitle />
-      {page?.title && <h2>{title}</h2>}
-      {page?.content && <PortableText value={content}></PortableText>}
+      {page?.title && <h3>{page?.title}</h3>}
+      {page?.content && <PortableText value={page.content}></PortableText>}
     </>
   )
 }
