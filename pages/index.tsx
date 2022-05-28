@@ -8,11 +8,13 @@ import { usePreviewSubscription } from '../lib/sanity'
 import { createClient } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
 import { config } from '../lib/config';
+import { homePageContentQuery, indexQuery } from '../lib/queries';
 import SiteHead from '../components/SiteHead';
-import SiteTitle from '../components/ SiteTitle'
+import SiteTitle from '../components/SiteTitle'
+import HeroPost from '../components/hero-post'
 
-
-const IndexPage: NextPage = ({ data }: any) => {
+const IndexPage: NextPage = ({ data, allPosts }: any) => {
+  const heroPost = allPosts[0];
   return (
     <>
       <SiteHead />
@@ -21,6 +23,17 @@ const IndexPage: NextPage = ({ data }: any) => {
         <PortableText
           value={data.homepage.body}
         />
+        {heroPost && (
+          <HeroPost 
+            title={heroPost.title}
+          // coverImage={heroPost.coverImage}
+            date={heroPost.date}
+            author={heroPost.author}
+            slug={heroPost.slug}
+            excerpt={heroPost.excerpt}
+
+        />
+        )}
       </main>
     </>
   );
@@ -31,15 +44,15 @@ export default IndexPage;
 // const client = createClient(config);
 
 export async function getStaticProps() {
-  const query = groq`*[_type == "homepage"][0] {
-    body,
-    }`;
-  const homepage: any[] = await getClient().fetch(query);
-
-  const data = { homepage };
+  // const query = groq`*[_type == "homepage"][0] {
+  //   body,
+  //   }`;
+  const allPosts: any[] = await getClient().fetch(indexQuery);
+  const homepage: any[] = await getClient().fetch(homePageContentQuery)
+  const data = { homepage, allPosts };
   return {
     props: {
-      data
+      data, allPosts
     },
     revalidate: 1, // TODO: look into what this line is doing
   };

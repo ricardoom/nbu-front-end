@@ -1,5 +1,6 @@
 import Head from "next/head"
 
+
 //TODO: get the <Meta> content attribute controlled at Sanity level?
 function SiteHead() {
   return (
