@@ -1,13 +1,14 @@
 import type { NextPage } from 'next';
+// TODO: Clean up commented code
 // import Head from 'next/head';
 // import Image from 'next/image';
 // import styles from '../styles/Home.module.css';
-import { groq } from 'next-sanity'
+// import { groq } from 'next-sanity'
+// import { config } from '../lib/config';
+// import { createClient } from 'next-sanity';
+// import { usePreviewSubscription } from '../lib/sanity'
 import { getClient } from '../lib/sanity.server'
-import { usePreviewSubscription } from '../lib/sanity'
-import { createClient } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
-import { config } from '../lib/config';
 import { homePageContentQuery, indexQuery } from '../lib/queries'
 import SiteHead from '../components/SiteHead';
 import SiteTitle from '../components/ SiteTitle';
@@ -29,10 +30,10 @@ const IndexPage: NextPage = ({ data, allPosts }: any) => {
             <HeroPost
               title={heroPost.title}
               // coverImage={heroPost.coverImage}
-              date={heroPost.date}
-              author={heroPost.author}
+              date={heroPost?.date}
+              author={heroPost?.author}
               slug={heroPost.slug}
-              excerpt={heroPost.excerpt}
+              excerpt={heroPost?.excerpt}
             />
           )}
       </main>
@@ -41,8 +42,6 @@ const IndexPage: NextPage = ({ data, allPosts }: any) => {
 };
 
 export default IndexPage;
-
-// const client = createClient(config);
 
 export async function getStaticProps() {
   const homepage: any[] = await getClient().fetch(homePageContentQuery);

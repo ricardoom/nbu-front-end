@@ -5,6 +5,7 @@ import { PortableText } from '@portabletext/react';
 import { allSlugsQuery } from '../../lib/queries';
 import SiteHead from '../../components/SiteHead';
 import SiteTitle from '../../components/ SiteTitle';
+import Date from '../../components/date';
 /**
  * Helper function to return the correct version of the document
  * If we're in "preview mode" and have multiple documents, return the draft
@@ -103,6 +104,9 @@ export default function Page({data, preview}) {
       <SiteTitle />
       {page?.title && <h3>{page?.title}</h3>}
       {page?.author && <p className='[ blog author ]'>{page?.author}</p>}
+      {page?.date && <p className='[ blog date ]'>
+        <Date dateString={page?.date} />
+      </p>}
       {page?.content && <PortableText value={page.content}></PortableText>}
     </>
   )

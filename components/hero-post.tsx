@@ -3,11 +3,11 @@ import Date from './date';
 
 
 interface Props {
-  title: string | any,
-  // coverImage: string | any,
-  date: string | any,
-  excerpt: string | any,
-  author: string | any,
+  title: string,
+  // coverImage: string,
+  date: string,
+  excerpt: string,
+  author: string,
   slug: string,
 }
 
