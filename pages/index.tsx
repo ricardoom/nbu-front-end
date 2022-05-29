@@ -8,6 +8,7 @@ import { usePreviewSubscription } from '../lib/sanity'
 import { createClient } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
 import { config } from '../lib/config';
+import { homePageContentQuery } from '../lib/queries'
 import SiteHead from '../components/SiteHead';
 import SiteTitle from '../components/ SiteTitle'
 
@@ -31,10 +32,10 @@ export default IndexPage;
 // const client = createClient(config);
 
 export async function getStaticProps() {
-  const query = groq`*[_type == "homepage"][0] {
-    body,
-    }`;
-  const homepage: any[] = await getClient().fetch(query);
+  // const query = groq`*[_type == "homepage"][0] {
+  //   body,
+  //   }`;
+  const homepage: any[] = await getClient().fetch(homePageContentQuery);
 
   const data = { homepage };
   return {
