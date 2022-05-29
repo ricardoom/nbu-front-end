@@ -1,11 +1,11 @@
 import Link from 'next/link'
-// import Date from './date'
+import Date from './date';
 
 
 interface Props {
   title: string | any,
   // coverImage: string | any,
-  // date: string | any,
+  date: string | any,
   excerpt: string | any,
   author: string | any,
   slug: string,
@@ -14,7 +14,7 @@ interface Props {
 export default function HeroPost({
   title,
   // coverImage,
-  // date,
+  date,
   excerpt,
   author,
   slug,
@@ -29,12 +29,12 @@ export default function HeroPost({
             </Link>
           </h3>
           <div className='[ author ]'>{author}</div>
-          <div className="dateString">
-            {/* <Date dateString={date} /> */}
-          </div>
         </div>
         <div>
           <p className="">{excerpt}</p>
+        </div>
+        <div className="dateString">
+          <Date dateString={date} />
         </div>
       </div>
     </section>

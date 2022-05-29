@@ -14,6 +14,7 @@ import SiteTitle from '../components/ SiteTitle';
 import HeroPost from '../components/hero-post';
 
 
+
 const IndexPage: NextPage = ({ data, allPosts }: any) => {
   const heroPost = allPosts[0];
   return (
@@ -28,7 +29,7 @@ const IndexPage: NextPage = ({ data, allPosts }: any) => {
             <HeroPost
               title={heroPost.title}
               // coverImage={heroPost.coverImage}
-              // date={heroPost.date}
+              date={heroPost.date}
               author={heroPost.author}
               slug={heroPost.slug}
               excerpt={heroPost.excerpt}
@@ -44,9 +45,6 @@ export default IndexPage;
 // const client = createClient(config);
 
 export async function getStaticProps() {
-  // const query = groq`*[_type == "homepage"][0] {
-  //   body,
-  //   }`;
   const homepage: any[] = await getClient().fetch(homePageContentQuery);
   const allPosts: any[] = await getClient().fetch(indexQuery)
   const data = { homepage };
