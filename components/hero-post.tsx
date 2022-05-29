@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Date from './date'
+// import Date from './date'
 
 
 interface Props {
@@ -28,6 +28,7 @@ export default function HeroPost({
               <a className="">{title}</a>
             </Link>
           </h3>
+          <div className='[ author ]'>{author}</div>
           <div className="dateString">
             {/* <Date dateString={date} /> */}
           </div>
