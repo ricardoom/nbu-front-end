@@ -23,7 +23,8 @@
   },
   "conventionalCommits.scopes": [
     "global",
-    "Blog"
+    "Blog",
+    "Design Theme UI"
   ],
   "cSpell.words": [
     "groq"
