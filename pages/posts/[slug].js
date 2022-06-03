@@ -4,7 +4,7 @@ import { getClient } from '../../lib/sanity.server'
 import { PortableText } from '@portabletext/react';
 import { allSlugsQuery } from '../../lib/queries';
 import SiteHead from '../../components/SiteHead';
-import SiteTitle from '../../components/ SiteTitle';
+import SiteTitle from '../../components/SiteTitle';
 import Date from '../../components/date';
 /**
  * Helper function to return the correct version of the document

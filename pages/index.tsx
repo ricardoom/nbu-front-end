@@ -10,8 +10,8 @@ import type { NextPage } from 'next';
 import { getClient } from '../lib/sanity.server'
 import { PortableText } from '@portabletext/react';
 import { homePageContentQuery, indexQuery } from '../lib/queries'
+import SiteTitle from '../components/SiteTitle';
 import SiteHead from '../components/SiteHead';
-import SiteTitle from '../components/ SiteTitle';
 import HeroPost from '../components/hero-post';
 
 
