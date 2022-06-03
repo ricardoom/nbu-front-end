@@ -32,11 +32,14 @@ export default function HeroPost({
         </div>
         <div>
           <p className="">{excerpt}</p>
+          <Link href={`/posts/${slug}`}>
+              <a className="">Continue Reading &gt;&gt;</a>
+          </Link>
+          </div>
         </div>
         <div className="dateString">
           <Date dateString={date} />
         </div>
-      </div>
     </section>
   )
 }
