@@ -2,8 +2,10 @@ import { groq } from 'next-sanity'
 import { usePreviewSubscription } from '../../lib/sanity'
 import { getClient } from '../../lib/sanity.server'
 import { PortableText } from '@portabletext/react';
+import { allSlugsQuery } from '../../lib/queries';
 import SiteHead from '../../components/SiteHead';
-import SiteTitle from '../../components/SiteTitle';
+import SiteTitle from '../../components/ SiteTitle';
+import Date from '../../components/date';
 /**
  * Helper function to return the correct version of the document
  * If we're in "preview mode" and have multiple documents, return the draft
@@ -32,7 +34,6 @@ function filterDataToSingleItem(data, preview) {
  * https://www.simeongriggs.dev/nextjs-sanity-slug-patterns
  */
 export async function getStaticPaths() {
-  const allSlugsQuery = groq`*[defined(slug.current)][].slug.current`
   const pages = await getClient().fetch(allSlugsQuery)
 
   return {
@@ -56,6 +57,7 @@ export async function getStaticPaths() {
  */
 export async function getStaticProps({params, preview = false}) {
   const query = groq`*[_type == "post" && slug.current == $slug]`
+  // const test = groq`*[_type == "post"]`
   const queryParams = {slug: params.slug}
   const data = await getClient(preview).fetch(query, queryParams)
 
@@ -92,8 +94,7 @@ export default function Page({data, preview}) {
   // Client-side uses the same query, so we may need to filter it down again
   const page = filterDataToSingleItem(previewData, preview)
 
-  // const { title, content } = page; //? Is it really necessary to destructure here?
-  // Notice the optional?.chaining conditionals wrapping every piece of content? 
+    // Notice the optional?.chaining conditionals wrapping every piece of content? 
   // This is extremely important as you can't ever rely on a single field
   // of data existing when Editors are creating new documents. 
   // It'll be completely blank when they start!
@@ -102,6 +103,10 @@ export default function Page({data, preview}) {
       <SiteHead />
       <SiteTitle />
       {page?.title && <h3>{page?.title}</h3>}
+      {page?.author && <p className='[ blog author ]'>{page?.author}</p>}
+      {page?.date && <p className='[ blog date ]'>
+        <Date dateString={page?.date} />
+      </p>}
       {page?.content && <PortableText value={page.content}></PortableText>}
     </>
   )

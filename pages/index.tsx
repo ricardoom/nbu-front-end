@@ -1,17 +1,20 @@
 import type { NextPage } from 'next';
+// TODO: Clean up commented code
 // import Head from 'next/head';
 // import Image from 'next/image';
 // import styles from '../styles/Home.module.css';
-import { groq } from 'next-sanity'
+// import { groq } from 'next-sanity'
+// import { config } from '../lib/config';
+// import { createClient } from 'next-sanity';
+// import { usePreviewSubscription } from '../lib/sanity'
 import { getClient } from '../lib/sanity.server'
-import { usePreviewSubscription } from '../lib/sanity'
-import { createClient } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
-import { config } from '../lib/config';
-import { homePageContentQuery, indexQuery } from '../lib/queries';
+import { homePageContentQuery, indexQuery } from '../lib/queries'
 import SiteHead from '../components/SiteHead';
-import SiteTitle from '../components/SiteTitle'
-import HeroPost from '../components/hero-post'
+import SiteTitle from '../components/ SiteTitle';
+import HeroPost from '../components/hero-post';
+
+
 
 const IndexPage: NextPage = ({ data, allPosts }: any) => {
   const heroPost = allPosts[0];
@@ -24,16 +27,15 @@ const IndexPage: NextPage = ({ data, allPosts }: any) => {
           value={data.homepage.body}
         />
         {heroPost && (
-          <HeroPost 
-            title={heroPost.title}
-          // coverImage={heroPost.coverImage}
-            date={heroPost.date}
-            author={heroPost.author}
-            slug={heroPost.slug}
-            excerpt={heroPost.excerpt}
-
-        />
-        )}
+            <HeroPost
+              title={heroPost.title}
+              // coverImage={heroPost.coverImage}
+              date={heroPost?.date}
+              author={heroPost?.author}
+              slug={heroPost.slug}
+              excerpt={heroPost?.excerpt}
+            />
+          )}
       </main>
     </>
   );
@@ -41,15 +43,12 @@ const IndexPage: NextPage = ({ data, allPosts }: any) => {
 
 export default IndexPage;
 
-// const client = createClient(config);
-
 export async function getStaticProps() {
-  // const query = groq`*[_type == "homepage"][0] {
-  //   body,
-  //   }`;
-  const allPosts: any[] = await getClient().fetch(indexQuery);
-  const homepage: any[] = await getClient().fetch(homePageContentQuery)
-  const data = { homepage, allPosts };
+  const homepage: any[] = await getClient().fetch(homePageContentQuery);
+  const allPosts: any[] = await getClient().fetch(indexQuery)
+  const data = { homepage };
+ 
+  
   return {
     props: {
       data, allPosts
