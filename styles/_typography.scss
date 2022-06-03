@@ -1,0 +1,27 @@
+// Type
+
+$sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol';
+
+$serif: Cambria, 'Liberation Serif', Times, Utopia, 'Hoefler Text', 'Nimbus Roman No9 L Regular', 'Times New Roman',
+  serif;
+
+$slab-serif: 'Rockwell', 'Rockwell Extra Bold', 'Courier New', Monoco, Courier, monospace;
+
+$lapture: 'jaf-lapture-display', $slab-serif;
+$lapture-regular: 'jaf-lapture', $slab-serif;
+$lemond: 'lemonde-journal', $serif;
+$franklin: 'franklin-gothic-urw', $sans-serif;
+
+:root {
+  --font-serif: #{$lapture};
+  --font-sans: #{$franklin};
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+}
+
+p {
+  font-family: var(--font-sans);
+}
