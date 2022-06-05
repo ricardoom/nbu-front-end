@@ -13,14 +13,20 @@ $lapture-regular: 'jaf-lapture', $slab-serif;
 $lemond: 'lemonde-journal', $serif;
 $franklin: 'franklin-gothic-urw', $sans-serif;
 
+// Open Props extensions:
+// We need to add our own custom type faces, so we overrid Open Props defaults here
+// We need some larger fluid sizes for the main title on the home page::after
+
 :root {
   --font-serif: #{$lapture};
   --font-sans: #{$franklin};
+  --font-size-fluid-4: clamp(2.75rem,12vw,4.5rem);
 }
 
 h1, h2, h3, h4 {
   font-family: var(--font-serif);
 }
+
 
 p {
   font-family: var(--font-sans);
