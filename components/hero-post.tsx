@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Date from './date';
-
+import titles from '../styles/component/Title.module.scss'
 
 interface Props {
   title: string,
@@ -23,7 +23,7 @@ export default function HeroPost({
     <section>
       <div className="">
         <div>
-          <h3 className="">
+          <h3 className={titles.blogTitle}>
             <Link href={`/posts/${slug}`}>
               <a className="">{title}</a>
             </Link>
