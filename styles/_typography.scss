@@ -14,7 +14,7 @@ $lemond: 'lemonde-journal', $serif;
 $franklin: 'franklin-gothic-urw', $sans-serif;
 
 // Open Props extensions:
-// We need to add our own custom type faces, so we overrid Open Props defaults here
+// We need to add our own custom type faces, so we override Open Props defaults here
 // We need some larger fluid sizes for the main title on the home page::after
 
 :root {
@@ -29,5 +29,7 @@ h1, h2, h3, h4 {
 
 
 p {
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
+  font-weight: normal;
 }
+
