@@ -12,7 +12,7 @@ const IndexPage: NextPage = ({ data, allPosts }: any) => {
     <>
       <SiteHead />
       <SiteTitle />
-      <main className='[ center ][ homepage ]'>
+      <main className='[ center ]'>
         <PortableText
           value={data.homepage.body}
         />

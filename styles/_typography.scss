@@ -20,7 +20,10 @@ $franklin: 'franklin-gothic-urw', $sans-serif;
 :root {
   --font-serif: #{$lapture};
   --font-sans: #{$franklin};
-  --font-size-fluid-4: clamp(2.75rem,12vw,4.5rem);
+  --font-size-fluid-4: clamp(2.75rem,12vw, 4.5rem);
+  --font-size-fluid-5: clamp(3rem, 13.5vw, 5.25rem);
+  --font-size-fluid-6: clamp(3.25rem, 14vw, 6rem);
+  --font-size-fluid-7: clamp(4rem, 15.25vw, 6.75rem);
 }
 
 h1, h2, h3, h4 {
