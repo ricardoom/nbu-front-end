@@ -1,10 +1,10 @@
-.headLine {
-  .unbound {
-    font-weight: 100;
-    }
+// Titles
+.unbound,
+.main {
+  display: block;
+  }
 
-  font-size: var(--font-size-fluid-4);
-}
+
 .subHeadline,
 .blogTitle {
   font-family: var(--font-sans);
@@ -21,3 +21,12 @@
   margin-block-end: var(--size-6);
   font-size: var(--font-size-fluid-1);
 }
+
+.homepage {
+    font-size: var(--font-size-fluid-7);
+}
+
+.interior {
+  font-size: var(--font-size-fluid-4);
+}
+
