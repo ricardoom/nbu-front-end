@@ -1,0 +1,38 @@
+// Type
+
+$sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol';
+
+$serif: Cambria, 'Liberation Serif', Times, Utopia, 'Hoefler Text', 'Nimbus Roman No9 L Regular', 'Times New Roman',
+  serif;
+
+$slab-serif: 'Rockwell', 'Rockwell Extra Bold', 'Courier New', Monoco, Courier, monospace;
+
+$lapture: 'jaf-lapture-display', $slab-serif;
+$lapture-regular: 'jaf-lapture', $slab-serif;
+$lemond: 'lemonde-journal', $serif;
+$franklin: 'franklin-gothic-urw', $sans-serif;
+
+// Open Props extensions:
+// We need to add our own custom type faces, so we override Open Props defaults here
+// We need some larger fluid sizes for the main title on the home page::after
+
+:root {
+  --font-serif: #{$lapture};
+  --font-sans: #{$franklin};
+  --font-size-fluid-4: clamp(2.75rem,12vw, 4.5rem);
+  --font-size-fluid-5: clamp(3rem, 13.5vw, 5.25rem);
+  --font-size-fluid-6: clamp(3.25rem, 14vw, 6rem);
+  --font-size-fluid-7: clamp(4rem, 15.25vw, 6.75rem);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+}
+
+
+p {
+  font-family: var(--font-serif);
+  font-weight: normal;
+}
+
