@@ -6,6 +6,7 @@ import { allSlugsQuery } from '../../lib/queries';
 import SiteHead from '../../components/SiteHead';
 import SiteTitle from '../../components/SiteTitle';
 import Date from '../../components/date';
+import titles from '../../styles/component/Title.module.scss';
 /**
  * Helper function to return the correct version of the document
  * If we're in "preview mode" and have multiple documents, return the draft
@@ -102,12 +103,14 @@ export default function Page({data, preview}) {
     <>
       <SiteHead />
       <SiteTitle />
-      {page?.title && <h3>{page?.title}</h3>}
+      <main className='center'>
+      {page?.title && <h3 className={titles.blogTitle}>{page?.title}</h3>}
       {page?.author && <p className='[ blog author ]'>{page?.author}</p>}
       {page?.date && <p className='[ blog date ]'>
         <Date dateString={page?.date} />
       </p>}
       {page?.content && <PortableText value={page.content}></PortableText>}
+      </main>
     </>
   )
 }

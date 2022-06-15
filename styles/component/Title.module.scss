@@ -1,0 +1,32 @@
+// Titles
+.unbound,
+.main {
+  display: block;
+  }
+
+
+.subHeadline,
+.blogTitle {
+  font-family: var(--font-sans);
+
+}
+
+.subHeadline {
+  font-size: var(--font-size-fluid-2);
+  font-weight: 400;
+}
+
+.blogTitle {
+  margin-block-start: var(--size-6);
+  margin-block-end: var(--size-6);
+  font-size: var(--font-size-fluid-1);
+}
+
+.homepage {
+    font-size: var(--font-size-fluid-7);
+}
+
+.interior {
+  font-size: var(--font-size-fluid-4);
+}
+

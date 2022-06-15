@@ -1,14 +1,36 @@
-import Link from "next/link"
+import { useRouter } from 'next/router'
+import Link from "next/link";
+import classNames from 'classnames/bind';
+import titles from '../styles/component/Title.module.scss';
+import TitleText  from './TitleText';
+
+let cx = classNames.bind(titles);
 
 const SiteTitle = () => {
+  const { asPath } = useRouter();
+  
+  let className = cx({
+    homepage: asPath === '/',
+    interior: asPath !== '/',
+    center: false,
+  });
+
   return (
-    <header>
-      <h1>
-      <Link href='/'>
-      Native Bound Unbound
-      </Link>
+    //! this code is not DRY 
+    <header className='[ center ]'>
+      {asPath !== '/' ? 
+      <h1 className={className}>
+        <Link href='/'>
+          <a>
+          <TitleText />
+          </a>
+        </Link>
       </h1>
-      <h2>Archive of Native American Enslavement</h2>
+      : // TODO: Refactor this big time! 
+      <h1 className={className}>
+        <TitleText />
+      </h1>}
+      <h2 className={titles.subHeadline}>Archive of Native American Enslavement</h2>
     </header>
   )
 }

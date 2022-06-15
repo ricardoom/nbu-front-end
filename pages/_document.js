@@ -5,7 +5,7 @@ export default function Document() {
     <Html lang='en'>
       <Head />
       <link rel="stylesheet" href="https://use.typekit.net/nci1ctu.css"/>
-      <body className='wrapper'>
+      <body className='[ wrapper ]'>
         <Main />
         <NextScript />
       </body>
