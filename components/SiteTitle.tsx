@@ -3,6 +3,7 @@ import Link from "next/link";
 import classNames from 'classnames/bind';
 import titles from '../styles/component/Title.module.scss';
 import TitleText  from './TitleText';
+import { TITLES } from '../lib/constants'
 
 let cx = classNames.bind(titles);
 
@@ -30,7 +31,7 @@ const SiteTitle = () => {
       <h1 className={className}>
         <TitleText />
       </h1>}
-      <h2 className={titles.subHeadline}>Archive of Native American Enslavement</h2>
+      <h2 className={titles.subHeadline}>{TITLES.subtitle}</h2>
     </header>
   )
 }
