@@ -1,12 +1,44 @@
+/* eslint-disable @next/next/no-img-element */
 import { groq } from 'next-sanity'
 import { usePreviewSubscription } from '../../lib/sanity'
-import { getClient } from '../../lib/sanity.server'
+import { getClient, sanityClient } from '../../lib/sanity.server'
+import imageUrlBuilder from '@sanity/image-url';
 import { PortableText } from '@portabletext/react';
 import { allSlugsQuery } from '../../lib/queries';
 import SiteHead from '../../components/SiteHead';
 import SiteTitle from '../../components/SiteTitle';
 import Date from '../../components/date';
 import titles from '../../styles/component/Title.module.scss';
+
+
+const builder = imageUrlBuilder(sanityClient);
+
+function urlFor(source) {
+  return builder.image(source)
+}
+
+const blogImageInline = {
+  types: {
+    image: ({ value }) => {
+      console.log(urlFor(value));
+
+      if (!value?.asset?._ref) {
+        return null
+      }
+      return (
+        <>
+        <img
+          alt={value.alt || ' '}
+          loading="lazy"
+          src={urlFor(value).auto('format').url()}
+        />
+        <p>{value.caption}</p>
+        </>
+      )
+    }
+  }
+}
+
 /**
  * Helper function to return the correct version of the document
  * If we're in "preview mode" and have multiple documents, return the draft
@@ -103,13 +135,13 @@ export default function Page({data, preview}) {
     <>
       <SiteHead />
       <SiteTitle />
-      <main className='center'>
+      <main className='[ center ]'>
       {page?.title && <h3 className={titles.blogTitle}>{page?.title}</h3>}
       {page?.author && <p className='[ blog author ]'>{page?.author}</p>}
       {page?.date && <p className='[ blog date ]'>
         <Date dateString={page?.date} />
       </p>}
-      {page?.content && <PortableText value={page.content}></PortableText>}
+      {page?.content && <PortableText value={page.content} components={blogImageInline}></PortableText>}
       </main>
     </>
   )
