@@ -20,8 +20,7 @@ function urlFor(source) {
 const blogImageInline = {
   types: {
     image: ({ value }) => {
-      console.log(urlFor(value));
-
+      // console.log(urlFor(value));
       if (!value?.asset?._ref) {
         return null
       }

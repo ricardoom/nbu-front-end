@@ -1,5 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
-import { urlFor } from '../lib/sanity';
+// import { urlFor } from '../lib/sanity';
+import { getClient, sanityClient } from '../lib/sanity.server'
+import imageUrlBuilder from '@sanity/image-url';
+import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+
+
 
 interface ImageProps {
   alt: string,
@@ -8,40 +14,34 @@ interface ImageProps {
   src: string,
 }
 
-// export default function blogImage({alt, caption, image:source}: ImageProps) {
-//   const image = source ? (
-//     <div>
-//       <Image alt={alt} src={urlFor(source).url } />
-//     </div>
-//   ) : (
-//     <div>No Image cabron...</div>
-//   );
+const builder = imageUrlBuilder(sanityClient);
 
-//   return (
-//     <div className='[ blog-image ]'>
-//       {image}
-//     </div>
-//   )
-// };
+function urlFor(source: SanityImageSource) {
+  return builder.image(source)
+}
 
-
-export const blogImage = {
+const blogImageInline = {
   types: {
+    content: ({ value }: JSX.Element) => {
+      return <p className='baba'>{value}</p>
+    },
     image: ({ value }: any) => {
+      console.log(urlFor(value));
+
       if (!value?.asset?._ref) {
-        console.log('there is no value being passed...')
         return null
       }
       return (
-        <Image
+        <>
+        <img
           alt={value.alt || ' '}
           loading="lazy"
-          src={urlFor(value).width(320).height(240).fit('max').auto('format')}
+          src={urlFor(value).auto('format').url()}
         />
+        <p>{value.caption}</p>
+        </>
       )
     }
   }
 }
-
-
 
