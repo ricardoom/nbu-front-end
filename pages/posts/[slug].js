@@ -1,5 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
+
 import { groq } from 'next-sanity'
+import Image from 'next/image';
 import { usePreviewSubscription } from '../../lib/sanity'
 import { getClient, sanityClient } from '../../lib/sanity.server'
 import imageUrlBuilder from '@sanity/image-url';
@@ -14,7 +15,7 @@ import titles from '../../styles/component/Title.module.scss';
 const builder = imageUrlBuilder(sanityClient);
 
 function urlFor(source) {
-  return builder.image(source)
+  return builder.image(source);
 }
 
 const blogImageInline = {
@@ -26,12 +27,15 @@ const blogImageInline = {
       }
       return (
         <>
-        <img
-          alt={value.alt || ' '}
-          loading="lazy"
-          src={urlFor(value).auto('format').url()}
-        />
-        <p>{value.caption}</p>
+          <Image
+            alt={value.alt || ' '}
+            loading='lazy'
+            layout='intrinsic'
+            width={475}
+            height={700}
+            src={urlFor(value).auto('format').url()}
+          />
+          <p>{value.caption}</p>
         </>
       )
     }
@@ -87,14 +91,14 @@ export async function getStaticPaths() {
  * It's set by Next.js "Preview Mode" 
  * It does not need to be set or changed here
  */
-export async function getStaticProps({params, preview = false}) {
+export async function getStaticProps({ params, preview = false }) {
   const query = groq`*[_type == "post" && slug.current == $slug]`
   // const test = groq`*[_type == "post"]`
-  const queryParams = {slug: params.slug}
+  const queryParams = { slug: params.slug }
   const data = await getClient(preview).fetch(query, queryParams)
 
   // Escape hatch, if our query failed to return data
-  if (!data) return {notFound: true}
+  if (!data) return { notFound: true }
 
   // Helper function to reduce all returned documents down to just one
   const page = filterDataToSingleItem(data, preview)
@@ -104,7 +108,7 @@ export async function getStaticProps({params, preview = false}) {
       // Pass down the "preview mode" boolean to the client-side
       preview,
       // Pass down the initial content, and our query
-      data: {page, query, queryParams}
+      data: { page, query, queryParams }
     }
   }
 }
@@ -113,8 +117,8 @@ export async function getStaticProps({params, preview = false}) {
  * The `usePreviewSubscription` takes care of updating
  * the preview content on the client-side
  */
-export default function Page({data, preview}) {
-  const {data: previewData} = usePreviewSubscription(data?.query, {
+export default function Page({ data, preview }) {
+  const { data: previewData } = usePreviewSubscription(data?.query, {
     params: data?.queryParams ?? {},
     // The hook will return this on first render
     // This is why it's important to fetch *draft* content server-side!
@@ -126,7 +130,7 @@ export default function Page({data, preview}) {
   // Client-side uses the same query, so we may need to filter it down again
   const page = filterDataToSingleItem(previewData, preview)
 
-    // Notice the optional?.chaining conditionals wrapping every piece of content? 
+  // Notice the optional?.chaining conditionals wrapping every piece of content? 
   // This is extremely important as you can't ever rely on a single field
   // of data existing when Editors are creating new documents. 
   // It'll be completely blank when they start!
@@ -135,12 +139,12 @@ export default function Page({data, preview}) {
       <SiteHead />
       <SiteTitle />
       <main className='[ center ]'>
-      {page?.title && <h3 className={titles.blogTitle}>{page?.title}</h3>}
-      {page?.author && <p className='[ blog author ]'>{page?.author}</p>}
-      {page?.date && <p className='[ blog date ]'>
-        <Date dateString={page?.date} />
-      </p>}
-      {page?.content && <PortableText value={page.content} components={blogImageInline}></PortableText>}
+        {page?.title && <h3 className={titles.blogTitle}>{page?.title}</h3>}
+        {page?.author && <p className='[ blog author ]'>{page?.author}</p>}
+        {page?.date && <p className='[ blog date ]'>
+          <Date dateString={page?.date} />
+        </p>}
+        {page?.content && <PortableText value={page.content} components={blogImageInline}></PortableText>}
       </main>
     </>
   )
