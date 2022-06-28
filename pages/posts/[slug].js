@@ -1,5 +1,6 @@
 
 import { groq } from 'next-sanity'
+
 import Image from 'next/image';
 import { usePreviewSubscription } from '../../lib/sanity'
 import { getClient, sanityClient } from '../../lib/sanity.server'
@@ -10,7 +11,6 @@ import SiteHead from '../../components/SiteHead';
 import SiteTitle from '../../components/SiteTitle';
 import Date from '../../components/date';
 import titles from '../../styles/component/Title.module.scss';
-
 
 const builder = imageUrlBuilder(sanityClient);
 

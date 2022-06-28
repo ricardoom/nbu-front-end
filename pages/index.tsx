@@ -5,12 +5,14 @@ import { homePageContentQuery, indexQuery } from '../lib/queries'
 import SiteTitle from '../components/SiteTitle';
 import SiteHead from '../components/SiteHead';
 import HeroPost from '../components/hero-post';
-
+import Meta from '../components/meta';
+import Footer from '../components/footer'
 const IndexPage: NextPage = ({ data, allPosts }: any) => {
   const heroPost = allPosts[0];
   return (
     <>
       <SiteHead />
+      <Meta />
       <SiteTitle />
       <main className='[ center ]'>
         <PortableText
@@ -27,6 +29,7 @@ const IndexPage: NextPage = ({ data, allPosts }: any) => {
             />
           )}
       </main>
+      <Footer />
     </>
   );
 };
